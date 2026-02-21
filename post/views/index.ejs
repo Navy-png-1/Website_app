@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <ul>
+            <% todos.forEach(function(todo) { %>
+                <form>
+                    <label for="text">Create a todo:</label><br>
+                    <input type="text" id="text">
+                </form>
+                <li>
+                <span> <%= todo.text %> </span>
+                </li>
+            <% }) %>
+        </ul>
+    </body>
+</html>
