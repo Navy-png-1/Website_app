@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.set("view engine", "ejs");
-
+app.use(express.urlencoded({ extended:true }));
 var todos = [{
             id:0,
             text: "testing",
@@ -19,16 +19,28 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+    console.log("printed something")
     const text = req.body.text;
     const data = req.body;
     console.log(data);
     if (text.trim() !== "" ) {
         todos.push({
-            id:idCounter++,
+            id:id++,
             text,
             completed:false
         });
     }
+    res.redirect("/");
+});
+
+app.post("/toggle/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log("toggling", id)
+    for (let i=0; i < todos.length; i++) {
+        if (todos[i].id == id){
+            todos[i].completed = true;
+        };
+    };
     res.redirect("/");
 });
 
