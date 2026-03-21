@@ -1,4 +1,6 @@
 <html>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
     <body>
         <form action="/" method="POST">
             <label for="text">Create a todo:</label><br>
@@ -10,7 +12,10 @@
                 <li>
                 <span> <%= todo.text %> </span>
                 <form action="/toggle/<%=todo.id%>" method="POST" id="<%=todo.id%>">
-                    <input type="checkbox" onchange="document.getElementById('<%=todo.id%>').submit()" <%= if (todo.completed) {"checked"} %> />
+                    <input type="checkbox" onchange="document.getElementById('<%=todo.id%>').submit()" <% if (todo.completed) { %> checked <%} %> />
+                </form>
+                <form action="/delete/<%=todo.id%>" method="POST">
+                    <button type="submit">Delete</button>
                 </form>
                 </li>
             <% }) %>

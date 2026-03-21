@@ -13,6 +13,7 @@ var todos = [{
         }];
 var id = 1;
 
+app.use(express.static('static'))
 app.get("/", (req, res) => {
     console.log(todos);
     res.render("index", {todos})
@@ -38,9 +39,17 @@ app.post("/toggle/:id", (req, res) => {
     console.log("toggling", id)
     for (let i=0; i < todos.length; i++) {
         if (todos[i].id == id){
-            todos[i].completed = true;
+            todos[i].completed = !todos[i].completed;
         };
     };
+    res.redirect("/");
+});
+
+app.post("/delete/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log("delete", id)
+    todos.filter(t => t.id === id);
+    console.log("hi")
     res.redirect("/");
 });
 
